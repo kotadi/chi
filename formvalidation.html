@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation</title>
+</head>
+<style>
+    .errormsg
+    {
+      color:red
+    }
+</style>
+<body>
+    <form id="register">
+    <!-- Name -->
+        <label for="name">Name:</label><br>
+        <input type="text" placeholder="Enter  the name" id="name">
+         <span class="errormsg" id="errorname"></span>
+    <!-- Email -->
+        <label for="email">Email:</label><br>
+        <input type="text" placeholder="Enter the Email id "  id="Email">
+         <span class="errormsg" id="erroremail"></span>
+     <!-- Mobile -->
+        <label for="mobile">Mobile Number:</label><br>
+        <input type="number" placeholder="mobile number "  id="mobile">
+        <span class="errormsg" id="errormobile"></span>
+    <button type="submit">submit</button>
+    </form>
+
+    <script>
+        document.getElementById("register").addEventListener("submit",(e)=>{
+
+    let valid = true;
+
+    // Get values
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let mobile = document.getElementById("mobile").value.trim();
+
+    // Clear old errors
+    document.getElementById("nameError").innerHTML = "";
+    document.getElementById("emailError").innerHTML = "";
+    document.getElementById("mobileError").innerHTML = "";
+
+    // Name validation
+    if (name === "") {
+        document.getElementById("nameError").innerHTML = "Name is required.";
+        valid = false;
+    }
+
+    // Email validation
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (email === "") {
+        document.getElementById("emailError").innerHTML = "Email is required.";
+        valid = false;
+    } else if (!emailPattern.test(email)) {
+        document.getElementById("emailError").innerHTML = "Enter a valid email.";
+        valid = false;
+    }
+
+    // Mobile validation (10 digits)
+    let mobilePattern = /^[0-9]{10}$/;
+    if (mobile === "") {
+        document.getElementById("mobileError").innerHTML = "Mobile number is required.";
+        valid = false;
+    } else if (!mobilePattern.test(mobile)) {
+        document.getElementById("mobileError").innerHTML = "Enter a valid 10-digit mobile number.";
+        valid = false;
+    }
+
+    if(valid) {
+      alert("Registration successfully")
+    }; // stop submission if invalid
+})
+</script>
+
+         
+         
+         
+         
+         
+         
+
+
+    
+    
+</body>
+</html>
